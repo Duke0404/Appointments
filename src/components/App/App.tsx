@@ -10,13 +10,7 @@ import AddAppointment from '../AddAppointment/AddAppointment'
 import AppointmentInfo from '../AppointmentInfo/AppointmentInfo'
 
 //Interfaces
-interface AppointmentInterface {
-	"id": string,
-    "petName": string,
-    "ownerName": string,
-    "aptNotes": string,
-    "aptDate": string
-}
+import { AppointmentInterface } from "../AppointmentInfo/AppointmentInfo"
 
 const App = (): JSX.Element => {
 	//States
@@ -25,7 +19,14 @@ const App = (): JSX.Element => {
 	const fetchAppointments = useCallback(async () => {
 		const response: Response = await fetch("./data/data.json")
 		const payload: AppointmentInterface[] = await response.json()
-		setAppointmentList(payload)
+
+		const changedPayload: AppointmentInterface[] = payload.map(
+			(element: AppointmentInterface) => (
+				{...element, id: +element.id}
+			)
+		)
+
+		setAppointmentList(changedPayload)
 	}, [])
 
 	useEffect(() => {
@@ -34,7 +35,7 @@ const App = (): JSX.Element => {
 	
 	const appointmentsList: JSX.Element[] = appointmentList.map(
 		(appointment: AppointmentInterface): JSX.Element => (
-			<AppointmentInfo appointment={appointment} key={+appointment.id} />
+			<AppointmentInfo appointment={appointment} key={appointment.id} />
 		)
 	)
 
