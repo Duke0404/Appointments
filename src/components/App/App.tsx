@@ -4,9 +4,6 @@ import { useState, useEffect, useCallback } from 'react'
 //Icons
 import { BiCalendar } from 'react-icons/bi'
 
-//Data
-import appointmentsData from '../../Data/data.json'
-
 //Components
 import Search from "../Search/Search"
 import AddAppointment from '../AddAppointment/AddAppointment'
@@ -30,8 +27,12 @@ const App = (): JSX.Element => {
 		const payload: AppointmentInterface[] = await response.json()
 		setAppointmentList(payload)
 	}, [])
+
+	useEffect(() => {
+		fetchAppointments()
+	}, [fetchAppointments])
 	
-	const appointmentsList: JSX.Element[] = appointmentsData.map(
+	const appointmentsList: JSX.Element[] = appointmentList.map(
 		(appointment: AppointmentInterface): JSX.Element => (
 			<AppointmentInfo appointment={appointment} key={+appointment.id} />
 		)
