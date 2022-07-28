@@ -16,6 +16,7 @@ const App = (): JSX.Element => {
 	//States
 	const [appointmentList, setAppointmentList] = useState<AppointmentInterface[]>([])
 
+	//Callbacks
 	const fetchAppointments = useCallback(async () => {
 		const response: Response = await fetch("./data/data.json")
 		const payload: AppointmentInterface<string>[] = await response.json()
@@ -29,13 +30,26 @@ const App = (): JSX.Element => {
 		setAppointmentList(changedPayload)
 	}, [])
 
+	//Effects
 	useEffect(() => {
 		fetchAppointments()
 	}, [fetchAppointments])
 	
-	const appointmentsList: JSX.Element[] = appointmentList.map(
+	//Functions
+	const deleteAppointment = (id: number): void => {
+		setAppointmentList(
+			(list: AppointmentInterface[]) =>
+				list.filter(
+					(element: AppointmentInterface) =>
+						element.id !== id
+				)
+		)
+	}
+
+	//Render variables
+	const appointmentListRender: JSX.Element[] = appointmentList.map(
 		(appointment: AppointmentInterface): JSX.Element => (
-			<AppointmentInfo appointment={appointment} key={appointment.id} />
+			<AppointmentInfo appointment={appointment} deleteAppointment={deleteAppointment} key={appointment.id} />
 		)
 	)
 
@@ -62,7 +76,7 @@ const App = (): JSX.Element => {
 				divide-y
 				divide-gray-200
 			'>
-				{appointmentsList}
+				{appointmentListRender}
 			</ul>
 		</div>
 	)

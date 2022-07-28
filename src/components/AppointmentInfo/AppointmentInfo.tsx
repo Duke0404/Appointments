@@ -12,12 +12,13 @@ export interface AppointmentInterface<idType = number> {
 
 interface AppointmentInfoProps {
     appointment: AppointmentInterface
+	deleteAppointment: (id: number) => void
     key: number
 }
 
-const AppointmentInfo = (props: AppointmentInfoProps) =>
-    <li className="px-3 py-3 flex items-start" key={props.key}>
-		<button type="button" className="p-1.5 mr-1.5 mt-1 rounded text-white bg-red-500hover:bg-yellow-700focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+const AppointmentInfo = (props: AppointmentInfoProps) => (
+    <li className="px-3 py-3 flex items-start" key={props.appointment.id}>
+		<button onClick={() => props.deleteAppointment(props.appointment.id)} type="button" className="p-1.5 mr-1.5 mt-1 rounded text-white bg-red-500 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
 			<BiTrash />
 		</button>
 
@@ -34,5 +35,6 @@ const AppointmentInfo = (props: AppointmentInfoProps) =>
 			<div className="leading-tight">{props.appointment.aptNotes}</div>
 		</div>
 	</li>
+)
 
 export default AppointmentInfo
