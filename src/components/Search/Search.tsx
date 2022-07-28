@@ -1,64 +1,74 @@
+//Boilerplate
+import { useState } from "react"
+
 //Icons
 import { BiSearch, BiCaretDown } from 'react-icons/bi'
 
 //Components
 import DropDown from '../DropDown/DropDown'
 
-const Search = (): JSX.Element => (
-	<div className="py-5">
-		<div className="
-			mt-1
-			relative
-			rounded-md
-			shadow-sm"
-		>
+const Search = (): JSX.Element => {
+	//States
+	const [toggleDropdown, setToggleDropdown] = useState<boolean>(false)
+
+	return (
+		<div className="py-5">
 			<div className="
-				absolute
-				inset-y-0
-				left-0
-				pl-3
-				flex
-				items-center
-				pointer-events-none
-			">
-				<BiSearch />
+				mt-1
+				relative
+				rounded-md
+				shadow-sm"
+			>
+				<div className="
+					absolute
+					inset-y-0
+					left-0
+					pl-3
+					flex
+					items-center
+					pointer-events-none
+				">
+					<BiSearch />
 
-				<label htmlFor="query" className="sr-only" />
-			</div>
+					<label htmlFor="query" className="sr-only" />
+				</div>
 
-			<input type="text" name="query" id="query" value="" className="
-				pl-8 rounded-md
-				focus:ring-indigo-500
-				focus:border-indigo-500
-				block
-				w-full
-				sm:text-sm
-				border-gray-300
-			" placeholder="Search" />
+				<input type="text" name="query" id="query" value="" className="
+					pl-8 rounded-md
+					focus:ring-indigo-500
+					focus:border-indigo-500
+					block
+					w-full
+					sm:text-sm
+					border-gray-300
+				" placeholder="Search" />
 
-			<div className="absolute inset-y-0 right-0 flex items-center">
-				<div>
-					<button type="button" className="
-						justify-center
-						px-4 py-2
-						bg-blue-400 border-2
-						border-blue-400
-						text-sm
-						text-white
-						hover:bg-blue-700
-						focus:outline-none
-						focus:ring-2
-						focus:ring-offset-2
-						flex items-center
-					" id="options-menu" aria-haspopup="true" aria-expanded="true">
-						Sort By <BiCaretDown className="ml-2" />
-					</button>
+				<div className="absolute inset-y-0 right-0 flex items-center">
+					<div>
+						<button type="button" 
+							onClick={() => setToggleDropdown((value: boolean) => !value)}
+							className="
+							justify-center
+							px-4 py-2
+							bg-blue-400 border-2
+							border-blue-400
+							text-sm
+							text-white
+							hover:bg-blue-700
+							focus:outline-none
+							focus:ring-2
+							focus:ring-offset-2
+							flex items-center
+						" id="options-menu" aria-haspopup="true" aria-expanded="true">
+							Sort By <BiCaretDown className="ml-2" />
+						</button>
 
-					<DropDown />
+						<DropDown toggleDropdown={toggleDropdown} />
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-)
+	)
+}
 
 export default Search

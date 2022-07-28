@@ -1,5 +1,8 @@
+//Boilerplate
+import { useState, useEffect, useCallback } from 'react'
+
 //Icons
-import { BiCalendar, BiTrash } from 'react-icons/bi'
+import { BiCalendar } from 'react-icons/bi'
 
 //Data
 import appointmentsData from '../../Data/data.json'
@@ -7,6 +10,7 @@ import appointmentsData from '../../Data/data.json'
 //Components
 import Search from "../Search/Search"
 import AddAppointment from '../AddAppointment/AddAppointment'
+import AppointmentInfo from '../AppointmentInfo/AppointmentInfo'
 
 //Interfaces
 interface AppointmentInterface {
@@ -18,26 +22,18 @@ interface AppointmentInterface {
 }
 
 const App = (): JSX.Element => {
+	//States
+	const [appointmentList, setAppointmentList] = useState<AppointmentInterface[]>([])
+
+	const fetchAppointments = useCallback(async () => {
+		const response: Response = await fetch("./data/data.json")
+		const payload: AppointmentInterface[] = await response.json()
+		setAppointmentList(payload)
+	}, [])
+	
 	const appointmentsList: JSX.Element[] = appointmentsData.map(
 		(appointment: AppointmentInterface): JSX.Element => (
-			<li className="px-3 py-3 flex items-start" key={appointment.id}>
-				<button type="button" className="p-1.5 mr-1.5 mt-1 rounded text-white bg-red-500hover:bg-yellow-700focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-					<BiTrash />
-				</button>
-
-				<div className="flex-grow">
-					<div className="flex items-center">
-						<span className="flex-none font-medium text-2xl text-blue-500">{appointment.petName}</span>
-						<span className="flex-grow text-right">{appointment.aptDate}</span>
-					</div>
-
-					<div>
-						<b className="font-bold text-blue-500">Owner:</b> {appointment.ownerName}
-					</div>
-
-					<div className="leading-tight">{appointment.aptNotes}</div>
-				</div>
-			</li>
+			<AppointmentInfo appointment={appointment} key={+appointment.id} />
 		)
 	)
 
