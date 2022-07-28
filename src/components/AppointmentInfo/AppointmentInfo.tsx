@@ -2,8 +2,8 @@
 import { BiTrash } from "react-icons/bi"
 
 //Interfaces
-export interface AppointmentInterface {
-	"id": number,
+export interface AppointmentInterface<idType = number> {
+	"id": idType,
     "petName": string,
     "ownerName": string,
     "aptNotes": string,
