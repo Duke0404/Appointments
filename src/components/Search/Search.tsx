@@ -7,10 +7,18 @@ import { BiSearch, BiCaretDown } from 'react-icons/bi'
 //Components
 import DropDown from '../DropDown/DropDown'
 
+//Enumerations
+import { sortByEnum } from "../DropDown/DropDown"
+import { orderByEnum } from "../DropDown/DropDown"
+
 //Interfaces
 interface SearchProps {
 	searchQuery: string
 	searchQueryChangeHandler: (query: string) => void
+	orderBy: orderByEnum
+	orderByChangeHandler: (orderBy: orderByEnum) => void
+	sortBy: sortByEnum
+	sortByChangeHandler: (sortBy: sortByEnum) => void
 }
 
 const Search = (props: SearchProps): JSX.Element => {
@@ -76,7 +84,13 @@ const Search = (props: SearchProps): JSX.Element => {
 							Sort By <BiCaretDown className="ml-2" />
 						</button>
 
-						<DropDown toggleDropdown={toggleDropdown} />
+						<DropDown
+							toggleDropdown={toggleDropdown}
+							orderBy={props.orderBy}
+							orderByChangeHandler={props.orderByChangeHandler}
+							sortBy={props.sortBy}
+							sortByChangeHandler={props.sortByChangeHandler}
+						/>
 					</div>
 				</div>
 			</div>

@@ -13,22 +13,15 @@ import AppointmentInfo from '../AppointmentInfo/AppointmentInfo'
 import { AppointmentInterface } from "../AppointmentInfo/AppointmentInfo"
 
 //Enumerations
-enum sortByEnum {
-	"petName" = 1,
-	"ownerName" = 2,
-	"aptDate" = 3
-}
-
-enum orderByEnum {
-	"ascending" = 1,
-	"descending" = -1
-}
+import { sortByEnum } from "../DropDown/DropDown"
+import { orderByEnum } from "../DropDown/DropDown"
+import { getAllByTestId } from '@testing-library/react'
 
 const App = (): JSX.Element => {
 	//States
 	const [appointmentList, setAppointmentList] = useState<AppointmentInterface[]>([])
 	const [searchQuery, setSearchQuery] = useState<string>("")
-	const [sortBy, setSortBy] = useState<sortByEnum>(1)
+	const [sortBy, setSortBy] = useState<sortByEnum>(3)
 	const [orderBy, setOrderBy] = useState<orderByEnum>(1)
 
 	//Callbacks
@@ -65,6 +58,22 @@ const App = (): JSX.Element => {
 		setSearchQuery(query)
 	}
 
+	const orderByChangeHandler = (orderBy: orderByEnum): void => {
+		setOrderBy(orderBy)
+	}
+
+	const sortByChangeHandler = (sortBy: sortByEnum): void => {
+		setSortBy(sortBy)
+	}
+
+	const formSave = (newAppointment: AppointmentInterface): void => {
+		setAppointmentList((list: AppointmentInterface[]) => [...list, newAppointment])
+	}
+
+	const lastId = appointmentList.reduce(
+		(max: number, current: AppointmentInterface) => current.id > max ? current.id : max, 0
+	)
+
 	//Search Filtered List of Appointments
 	const filteredAppointmentList: AppointmentInterface[] = appointmentList.filter(
 		(appointment: AppointmentInterface): boolean =>
@@ -72,8 +81,11 @@ const App = (): JSX.Element => {
 			appointment.ownerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			appointment.aptNotes.toLowerCase().includes(searchQuery.toLowerCase())
 	).sort(
-		(a: AppointmentInterface, b: AppointmentInterface): number => 
-			a[sortByEnum[sortBy]] > b[sortByEnum[sortBy]] ? orderBy : -orderBy
+		(a: AppointmentInterface, b: AppointmentInterface): number => {
+			const sortByText = sortByEnum[sortBy] as keyof Omit<AppointmentInterface, "id" | "aptNotes">
+				
+			return a[sortByText].toLowerCase() > b[sortByText].toLowerCase() ? orderBy : -orderBy
+		}
 	)
 
 	//Render variables
@@ -100,9 +112,19 @@ const App = (): JSX.Element => {
 				'/> Hello World
 			</h1>
 
-			<AddAppointment />
+			<AddAppointment
+				lastId={lastId}
+				formSave={formSave}
+			/>
 
-			<Search searchQuery={searchQuery} searchQueryChangeHandler={searchQueryChangeHandler} />
+			<Search
+				searchQuery={searchQuery}
+				searchQueryChangeHandler={searchQueryChangeHandler}
+				orderBy={orderBy}
+				orderByChangeHandler={orderByChangeHandler}
+				sortBy={sortBy}
+				sortByChangeHandler={sortByChangeHandler}
+			/>
 
 			<ul className='
 				divide-y
