@@ -12,10 +12,24 @@ import AppointmentInfo from '../AppointmentInfo/AppointmentInfo'
 //Interfaces
 import { AppointmentInterface } from "../AppointmentInfo/AppointmentInfo"
 
+//Enumerations
+enum sortByEnum {
+	"petName" = 1,
+	"ownerName" = 2,
+	"aptDate" = 3
+}
+
+enum orderByEnum {
+	"ascending" = 1,
+	"descending" = -1
+}
+
 const App = (): JSX.Element => {
 	//States
 	const [appointmentList, setAppointmentList] = useState<AppointmentInterface[]>([])
 	const [searchQuery, setSearchQuery] = useState<string>("")
+	const [sortBy, setSortBy] = useState<sortByEnum>(1)
+	const [orderBy, setOrderBy] = useState<orderByEnum>(1)
 
 	//Callbacks
 	const fetchAppointments = useCallback(async () => {
@@ -52,15 +66,18 @@ const App = (): JSX.Element => {
 	}
 
 	//Search Filtered List of Appointments
-	const searchFilteredAppointmentList: AppointmentInterface[] = appointmentList.filter(
+	const filteredAppointmentList: AppointmentInterface[] = appointmentList.filter(
 		(appointment: AppointmentInterface): boolean =>
 			appointment.petName.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			appointment.ownerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			appointment.aptNotes.toLowerCase().includes(searchQuery.toLowerCase())
+	).sort(
+		(a: AppointmentInterface, b: AppointmentInterface): number => 
+			a[sortByEnum[sortBy]] > b[sortByEnum[sortBy]] ? orderBy : -orderBy
 	)
-	
+
 	//Render variables
-	const appointmentListRender: JSX.Element[] = searchFilteredAppointmentList.map(
+	const appointmentListRender: JSX.Element[] = filteredAppointmentList.map(
 		(appointment: AppointmentInterface): JSX.Element => (
 			<AppointmentInfo appointment={appointment} deleteAppointment={deleteAppointment} key={appointment.id} />
 		)
