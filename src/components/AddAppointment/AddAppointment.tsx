@@ -6,6 +6,9 @@ import { BiCalendarPlus } from "react-icons/bi"
 
 //Interfaces
 import { AppointmentInterface } from "../AppointmentInfo/AppointmentInfo"
+interface AppointmentWithTimeInterface extends AppointmentInterface {
+	aptTime: string
+}
 
 interface AddAppointmentProps {
 	lastId: number
@@ -14,25 +17,23 @@ interface AddAppointmentProps {
 
 const AddAppointment = (props: AddAppointmentProps): JSX.Element => {
 	//Empty form
-	const emptyForm: AppointmentInterface = {
+	const emptyForm: AppointmentWithTimeInterface = {
 		id: 0,
 		ownerName: "",
 		petName: "",
 		aptDate: "",
+		aptTime: "",
 		aptNotes: ""
 	}
 
 	//States
 	const [toggleForm, setToggleForm] = useState<boolean>(false)
-	const [formData, setFormData] = useState<AppointmentInterface>(emptyForm)
+	const [formData, setFormData] = useState<AppointmentWithTimeInterface>(emptyForm)
 
 	//Fuctions
 	const formSubmitHandler = (): void => {
-		setFormData(
-			(form: AppointmentInterface) => ({...form, id: props.lastId + 1})
-		)
-
-		props.formSave(formData)
+		const modifiedFormData: AppointmentInterface = {...formData, id: props.lastId + 1, aptDate: formData.aptDate + " " + formData.aptTime}
+		props.formSave(modifiedFormData)
 		setFormData(emptyForm)
 		setToggleForm(false)
 	}
@@ -44,7 +45,7 @@ const AddAppointment = (props: AddAppointmentProps): JSX.Element => {
 				className={`bg-blue-400 text-white px-2 py-3 w-full text-left
 					${ toggleForm ? "rounded-t-md" : "rounded-md"}`}
 			>
-				<div><BiCalendarPlus className="inline-block align-text-top" />  Add Appointment</div>
+				<div><BiCalendarPlus className="inline-block align-text-top" /> Add Appointment</div>
 			</button>
 
 			{
@@ -110,12 +111,10 @@ const AddAppointment = (props: AddAppointmentProps): JSX.Element => {
 							<input
 								onChange={
 									(event: React.ChangeEvent<HTMLInputElement>): void => {
-										setFormData(
-											{...formData, aptDate: formData.aptDate.length !== 10 ? formData.aptDate + " " + event.target.value : formData.aptDate}
-										)
+										setFormData({...formData, aptTime: event.target.value})
 									}
 								}
-								value={formData.aptDate.slice(11)}
+								value={formData.aptTime}
 								type="time" name="aptTime" id="aptTime"
 								className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 	sm:max-w-xs 	sm:text-sm border-gray-300 rounded-md" />
 						</div>
@@ -143,7 +142,7 @@ const AddAppointment = (props: AddAppointmentProps): JSX.Element => {
 					<div className="pt-5">
 						<div className="flex justify-end">
 							<button
-								onSubmit={formSubmitHandler}
+								onClick={formSubmitHandler}
 								type="submit" className="ml-3 inline-flex justify-center py-2 px-4 border 	border-transparent 	shadow-sm text-sm font-medium rounded-md text-white bg-blue-400 	hover:bg-blue-700 focus:outline-none 	focus:ring-2 focus:ring-offset-2 focus:ring-blue-400">
 								Submit
 							</button>

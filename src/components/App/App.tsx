@@ -15,7 +15,6 @@ import { AppointmentInterface } from "../AppointmentInfo/AppointmentInfo"
 //Enumerations
 import { sortByEnum } from "../DropDown/DropDown"
 import { orderByEnum } from "../DropDown/DropDown"
-import { getAllByTestId } from '@testing-library/react'
 
 const App = (): JSX.Element => {
 	//States
@@ -70,10 +69,6 @@ const App = (): JSX.Element => {
 		setAppointmentList((list: AppointmentInterface[]) => [...list, newAppointment])
 	}
 
-	const lastId = appointmentList.reduce(
-		(max: number, current: AppointmentInterface) => current.id > max ? current.id : max, 0
-	)
-
 	//Search Filtered List of Appointments
 	const filteredAppointmentList: AppointmentInterface[] = appointmentList.filter(
 		(appointment: AppointmentInterface): boolean =>
@@ -86,6 +81,10 @@ const App = (): JSX.Element => {
 				
 			return a[sortByText].toLowerCase() > b[sortByText].toLowerCase() ? orderBy : -orderBy
 		}
+	)
+
+	const lastId: number = appointmentList.reduce(
+		(max: number, current: AppointmentInterface) => current.id > max ? current.id : max, 0
 	)
 
 	//Render variables
