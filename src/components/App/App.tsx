@@ -15,6 +15,7 @@ import { AppointmentInterface } from "../AppointmentInfo/AppointmentInfo"
 const App = (): JSX.Element => {
 	//States
 	const [appointmentList, setAppointmentList] = useState<AppointmentInterface[]>([])
+	const [searchQuery, setSearchQuery] = useState<string>("")
 
 	//Callbacks
 	const fetchAppointments = useCallback(async () => {
@@ -46,12 +47,26 @@ const App = (): JSX.Element => {
 		)
 	}
 
+	const searchQueryChangeHandler = (query: string): void => {
+		setSearchQuery(query)
+	}
+
+	//Search Filtered List of Appointments
+	const searchFilteredAppointmentList: AppointmentInterface[] = appointmentList.filter(
+		(appointment: AppointmentInterface): boolean =>
+			appointment.petName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			appointment.ownerName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			appointment.aptNotes.toLowerCase().includes(searchQuery.toLowerCase())
+	)
+	
 	//Render variables
-	const appointmentListRender: JSX.Element[] = appointmentList.map(
+	const appointmentListRender: JSX.Element[] = searchFilteredAppointmentList.map(
 		(appointment: AppointmentInterface): JSX.Element => (
 			<AppointmentInfo appointment={appointment} deleteAppointment={deleteAppointment} key={appointment.id} />
 		)
 	)
+
+	
 
 	return (
 		<div className='
@@ -70,7 +85,7 @@ const App = (): JSX.Element => {
 
 			<AddAppointment />
 
-			<Search />
+			<Search searchQuery={searchQuery} searchQueryChangeHandler={searchQueryChangeHandler} />
 
 			<ul className='
 				divide-y

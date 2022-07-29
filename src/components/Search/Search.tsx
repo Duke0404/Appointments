@@ -7,7 +7,13 @@ import { BiSearch, BiCaretDown } from 'react-icons/bi'
 //Components
 import DropDown from '../DropDown/DropDown'
 
-const Search = (): JSX.Element => {
+//Interfaces
+interface SearchProps {
+	searchQuery: string
+	searchQueryChangeHandler: (query: string) => void
+}
+
+const Search = (props: SearchProps): JSX.Element => {
 	//States
 	const [toggleDropdown, setToggleDropdown] = useState<boolean>(false)
 
@@ -33,7 +39,14 @@ const Search = (): JSX.Element => {
 					<label htmlFor="query" className="sr-only" />
 				</div>
 
-				<input type="text" name="query" id="query" value="" className="
+				<input
+					onChange={
+						(event: React.ChangeEvent<HTMLInputElement>): void => {
+							props.searchQueryChangeHandler(event.target.value)
+						}
+					}
+					value={props.searchQuery}
+					type="text" name="query" id="query" className="
 					pl-8 rounded-md
 					focus:ring-indigo-500
 					focus:border-indigo-500
