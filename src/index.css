@@ -9,4 +9,24 @@
     --accent-primary-2: #EE964D;
     --accent-primary-3: #C18A54;
     --accent-primary-4: #422311;
+
+    --text-1: #000;
+    --text-2: #315870;
+    --text-1-dark: #F0F0F0;
+    --text-2-dark: #bed9eb;
+
+    --background-1: #FFF;
+    --background-2: #FFF;
+    --background-1-dark: #212121;
+    --background-2-dark: #424242;
+}
+
+body {
+    background-color: #FFF;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #212121;
+    }
 }

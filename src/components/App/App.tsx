@@ -98,7 +98,11 @@ const App = (): JSX.Element => {
 
 	return (
 		<div className='
-			m-2
+			p-2
+			text-text-1
+			bg-background-1
+			dark:text-text-1-dark
+			dark:bg-background-1-dark
 		'>
 			<h1 className='text-3xl mb-3 font-semibold'>
 				<img src={bulldogIcon} alt="Clinic Logo" className="

@@ -17,7 +17,16 @@ interface AppointmentInfoProps {
 }
 
 const AppointmentInfo = (props: AppointmentInfoProps) => (
-    <li className="px-3 py-3 flex items-start" key={props.appointment.id}>
+    <li
+		className="
+			bg-background-2
+			dark:bg-background-2-dark
+			p-4
+			rounded-xl
+			drop-shadow-sm
+		"
+		key={props.appointment.id}
+	>
 		<button onClick={() => props.deleteAppointment(props.appointment.id)} type="button" className="p-1.5 mr-1.5 mt-1 rounded text-white bg-red-500 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
 			<BiTrash />
 		</button>

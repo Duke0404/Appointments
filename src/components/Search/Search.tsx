@@ -2,7 +2,8 @@
 import { useState } from "react"
 
 //Icons
-import { BiSearch, BiCaretDown } from 'react-icons/bi'
+import { IoSearch } from "react-icons/io5"
+import { BiCaretDown } from 'react-icons/bi'
 
 //Components
 import DropDown from '../DropDown/DropDown'
@@ -28,11 +29,8 @@ const Search = (props: SearchProps): JSX.Element => {
 	return (
 		<div className="py-5">
 			<div className="
-				mt-1
 				relative
-				rounded-md
-				shadow-sm"
-			>
+			">
 				<div className="
 					absolute
 					inset-y-0
@@ -42,7 +40,7 @@ const Search = (props: SearchProps): JSX.Element => {
 					items-center
 					pointer-events-none
 				">
-					<BiSearch />
+					<IoSearch />
 
 					<label htmlFor="query" className="sr-only" />
 				</div>
@@ -54,34 +52,46 @@ const Search = (props: SearchProps): JSX.Element => {
 						}
 					}
 					value={props.searchQuery}
-					type="text" name="query" id="query" className="
-					pl-8 rounded-md
-					focus:ring-indigo-500
-					focus:border-indigo-500
-					block
-					w-full
-					sm:text-sm
-					border-gray-300
-				" placeholder="Search" />
+					type="text"
+					name="query"
+					id="query"
+					className="
+						w-4/5
+						bg-background-1
+						dark:bg-background-1-dark
+						text-text-1
+						dark:text-text-1-dark
+						rounded-full
+						py-3
+						pl-9
+						pr-5
+						border-2
+						border-text-1
+						dark:border-text-1-dark
+					"
+					placeholder="Search"
+				/>
 
 				<div className="absolute inset-y-0 right-0 flex items-center">
 					<div>
 						<button type="button" 
 							onClick={() => setToggleDropdown((value: boolean) => !value)}
 							className="
-							justify-center
-							px-4 py-2
-							bg-blue-400 border-2
-							border-blue-400
-							text-sm
-							text-white
-							hover:bg-blue-700
-							focus:outline-none
-							focus:ring-2
-							focus:ring-offset-2
-							flex items-center
-						" id="options-menu" aria-haspopup="true" aria-expanded="true">
-							Sort By <BiCaretDown className="ml-2" />
+								bg-accent-secondary-1
+								py-3
+								px-5
+								text-text-1
+								rounded-full
+								drop-shadow-md
+								z-10
+								hover:bg-accent-secondary-2
+								active:shadow-lg
+							"
+							id="options-menu"
+							aria-haspopup="true"
+							aria-expanded="true"
+						>
+							Sort <BiCaretDown className="ml-2" />
 						</button>
 
 						<DropDown

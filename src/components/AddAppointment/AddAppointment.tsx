@@ -46,13 +46,15 @@ const AddAppointment = (props: AddAppointmentProps): JSX.Element => {
 					bg-accent-secondary-1
 					py-3
 					px-5
+					text-text-1
 					rounded-full
 					fixed
 					right-2
 					bottom-5
+					drop-shadow-md
+					z-10
 					md:top-3
 					md:bottom-auto
-					drop-shadow-md
 					hover:bg-accent-secondary-2
 					active:shadow-lg
 				"
