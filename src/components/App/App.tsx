@@ -1,9 +1,6 @@
 //Boilerplate
 import { useState, useEffect, useCallback } from 'react'
 
-//Icons
-import { BiCalendar } from 'react-icons/bi'
-
 //Images
 import bulldogIcon from "../../Images/Bulldog.svg"
 
