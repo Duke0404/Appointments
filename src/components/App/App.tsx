@@ -4,6 +4,9 @@ import { useState, useEffect, useCallback } from 'react'
 //Icons
 import { BiCalendar } from 'react-icons/bi'
 
+//Images
+import bulldogIcon from "../../Images/Bulldog.svg"
+
 //Components
 import Search from "../Search/Search"
 import AddAppointment from '../AddAppointment/AddAppointment'
@@ -104,11 +107,10 @@ const App = (): JSX.Element => {
 			font-thin
 		'>
 			<h1 className='text-5xl mb-3'>
-				<BiCalendar className='
-					inline-block
-					text-red-400
-					align-top
-				'/> Hello World
+				<img src={bulldogIcon} alt="Clinic Icon" className="
+					inline
+					height-10
+				"/> Appointments
 			</h1>
 
 			<AddAppointment
