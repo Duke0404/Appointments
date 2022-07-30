@@ -2,7 +2,7 @@
 import React, { useState } from "react"
 
 //Icons
-import { BiCalendarPlus } from "react-icons/bi"
+import { IoMdAddCircleOutline } from "react-icons/io"
 
 //Interfaces
 import { AppointmentInterface } from "../AppointmentInfo/AppointmentInfo"
@@ -39,13 +39,25 @@ const AddAppointment = (props: AddAppointmentProps): JSX.Element => {
 	}
 
 	return (
-		<div>
+		<>
 			<button
 				onClick={() => setToggleForm((value: boolean) => !value)}
-				className={`bg-blue-400 text-white px-2 py-3 w-full text-left
-					${ toggleForm ? "rounded-t-md" : "rounded-md"}`}
+				className="
+					bg-accent-secondary-1
+					py-3
+					px-5
+					rounded-full
+					fixed
+					right-2
+					bottom-5
+					md:top-3
+					md:bottom-auto
+					drop-shadow-md
+					hover:bg-accent-secondary-2
+					active:shadow-lg
+				"
 			>
-				<div><BiCalendarPlus className="inline-block align-text-top" /> Add Appointment</div>
+				<IoMdAddCircleOutline className="inline mb-1" /> Add New
 			</button>
 
 			{
@@ -150,7 +162,7 @@ const AddAppointment = (props: AddAppointmentProps): JSX.Element => {
 					</div>
 				</div>
 			}
-		</div>
+		</>
 	)
 }
 

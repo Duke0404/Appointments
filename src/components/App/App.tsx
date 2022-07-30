@@ -98,15 +98,13 @@ const App = (): JSX.Element => {
 
 	return (
 		<div className='
-			container
-			mx-auto
-			mt-4
-			font-thin
+			m-2
 		'>
-			<h1 className='text-5xl mb-3'>
-				<img src={bulldogIcon} alt="Clinic Icon" className="
+			<h1 className='text-3xl mb-3 font-semibold'>
+				<img src={bulldogIcon} alt="Clinic Logo" className="
 					inline
-					height-10
+					w-14
+					mb-2
 				"/> Appointments
 			</h1>
 
