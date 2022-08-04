@@ -23,7 +23,7 @@ const AppointmentInfo = (props: AppointmentInfoProps) => (
 			dark:bg-background-2-dark
 			p-4
 			rounded-xl
-			drop-shadow-sm
+			drop-shadow-md
 		"
 		key={props.appointment.id}
 	>

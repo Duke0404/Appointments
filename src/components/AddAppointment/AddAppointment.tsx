@@ -49,14 +49,14 @@ const AddAppointment = (props: AddAppointmentProps): JSX.Element => {
 					text-text-1
 					rounded-full
 					fixed
-					right-2
+					right-4
 					bottom-5
-					drop-shadow-md
+					drop-shadow-lg
 					z-10
-					md:top-3
+					md:top-6
 					md:bottom-auto
 					hover:bg-accent-secondary-2
-					active:shadow-lg
+					active:shadow-xl
 				"
 			>
 				<IoMdAddCircleOutline className="inline mb-1" /> Add New

@@ -3,7 +3,7 @@ import { useState } from "react"
 
 //Icons
 import { IoSearch } from "react-icons/io5"
-import { BiCaretDown } from 'react-icons/bi'
+import { IoFilter } from 'react-icons/io5'
 
 //Components
 import DropDown from '../DropDown/DropDown'
@@ -82,16 +82,17 @@ const Search = (props: SearchProps): JSX.Element => {
 								px-5
 								text-text-1
 								rounded-full
-								drop-shadow-md
+								drop-shadow-lg
 								z-10
+								md:bottom-auto
 								hover:bg-accent-secondary-2
-								active:shadow-lg
+								active:shadow-xl
 							"
 							id="options-menu"
 							aria-haspopup="true"
 							aria-expanded="true"
 						>
-							Sort <BiCaretDown className="ml-2" />
+							Sort <IoFilter className="inline mb-1" />
 						</button>
 
 						<DropDown

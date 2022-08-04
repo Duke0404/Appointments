@@ -94,11 +94,9 @@ const App = (): JSX.Element => {
 		)
 	)
 
-	
-
 	return (
 		<div className='
-			p-2
+			p-4
 			text-text-1
 			bg-background-1
 			dark:text-text-1-dark
@@ -127,8 +125,9 @@ const App = (): JSX.Element => {
 			/>
 
 			<ul className='
-				divide-y
-				divide-gray-200
+				flex
+				flex-col
+				gap-4
 			'>
 				{appointmentListRender}
 			</ul>
