@@ -1,5 +1,6 @@
 //Icons
 import { BiCheck } from "react-icons/bi"
+import { IoMdCheckmark } from "react-icons/io"
 
 //Enumerations
 export enum orderByEnum {
@@ -23,24 +24,121 @@ interface DropDownProps {
 }
 
 const DropDown = (props: DropDownProps): JSX.Element => !props.toggleDropdown ? <></> : (
-		<div className="origin-top-right absolute right-0 mt-2 w-56
-		rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-		<div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-			<div onClick={(): void => {props.sortByChangeHandler(1)}}
-				className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-				role="menuitem">Pet Name {props.sortBy === 1 && <BiCheck />}</div>
-			<div onClick={(): void => {props.sortByChangeHandler(2)}}
-				className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-				role="menuitem">Owner Name {props.sortBy === 2 && <BiCheck />}</div>
-			<div onClick={(): void => {props.sortByChangeHandler(3)}}
-				className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-				role="menuitem">Date {props.sortBy === 3 && <BiCheck />}</div>
-			<div onClick={(): void => {props.orderByChangeHandler(1)}}
-				className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer border-gray-1 border-t-2"
-				role="menuitem">Asc {props.orderBy === 1 && <BiCheck />}</div>
-			<div onClick={(): void => {props.orderByChangeHandler(-1)}}
-				className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between cursor-pointer"
-				role="menuitem">Desc {props.orderBy === -1 && <BiCheck />}</div>
+		<div
+			className="
+				z-20
+				bg-background-3
+				dark:bg-background-3-dark
+				w-60
+				p-3
+				absolute
+				top-16
+				right-0
+				shadow-lg
+				rounded-3xl
+			"
+		>
+		<div
+			role="menu"
+			aria-orientation="vertical"
+			aria-labelledby="options-menu"
+			className="
+				flex
+				flex-col
+				gap-2
+				text-text-1
+				dark:text-text-1-dark
+			"	
+		>
+			<div
+				onClick={(): void => {props.sortByChangeHandler(1)}}
+				role="menuitem"
+				className="
+					flex
+					justify-between
+					items-center
+					text-sm
+					py-3
+					px-4
+					cursor-pointer
+					rounded-full
+					hover:bg-accent-tertiary-2
+				"
+			>
+				Pet Name {props.sortBy === 1 && <IoMdCheckmark />}
+			</div>
+
+			<div
+				onClick={(): void => {props.sortByChangeHandler(2)}}
+				role="menuitem"
+				className="
+					flex
+					justify-between
+					items-center
+					text-sm
+					py-3
+					px-4
+					cursor-pointer
+					rounded-full
+					hover:bg-accent-tertiary-2
+				"
+			>
+				Owner Name {props.sortBy === 2 && <BiCheck />}
+			</div>
+
+			<div
+				onClick={(): void => {props.sortByChangeHandler(3)}}
+				role="menuitem"
+				className="
+					flex
+					justify-between
+					items-center
+					text-sm
+					py-3
+					px-4
+					cursor-pointer
+					rounded-full
+					hover:bg-accent-tertiary-2
+				"
+			>
+				Date {props.sortBy === 3 && <BiCheck />}
+			</div>
+
+			<div
+				onClick={(): void => {props.orderByChangeHandler(1)}}
+				role="menuitem"
+				className="
+					flex
+					justify-between
+					items-center
+					text-sm
+					py-3
+					px-4
+					cursor-pointer
+					rounded-full
+					hover:bg-accent-tertiary-2
+				"
+			>
+				Ascending {props.orderBy === 1 && <BiCheck />}
+			</div>
+
+			<div
+				onClick={(): void => {props.orderByChangeHandler(-1)}}
+				role="menuitem"
+				className="
+					flex
+					justify-between
+					items-center
+					text-sm
+					py-3
+					px-4
+					cursor-pointer
+					rounded-full
+					hover:bg-accent-tertiary-2
+				"
+			>
+				Descending {props.orderBy === -1 && <BiCheck />}
+			</div>
 		</div>
 	</div>
 )

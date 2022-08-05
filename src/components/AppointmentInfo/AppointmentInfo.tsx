@@ -39,7 +39,6 @@ const AppointmentInfo = (props: AppointmentInfoProps) => (
 				text-text-1
 				rounded-full
 				drop-shadow-lg
-				z-10
 				md:bottom-auto
 				hover:bg-accent-tertiary-2
 				active:shadow-xl
