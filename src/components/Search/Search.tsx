@@ -1,9 +1,8 @@
 //Boilerplate
-import { useState, useEffect, useRef, ReactEventHandler } from "react"
+import { useState, useEffect, useRef } from "react"
 
 //Icons
-import { IoSearch } from "react-icons/io5"
-import { IoFilter } from 'react-icons/io5'
+import { IoSearch, IoFilter } from "react-icons/io5"
 
 //Components
 import DropDown from '../DropDown/DropDown'
@@ -42,12 +41,10 @@ const Search = (props: SearchProps): JSX.Element => {
 
 			document.addEventListener("mousedown", clickOutsideHandler)
 			document.addEventListener("scroll", clickOutsideHandler)
-			// document.addEventListener("touchstart", clickOutsideHandler)
 
 			return (): void => {
 				document.removeEventListener("mousedown", clickOutsideHandler)
 				document.removeEventListener("scroll", clickOutsideHandler)
-				// document.removeEventListener("touchstart", clickOutsideHandler)
 			}
 		},
 		[toggleDropdown]
@@ -62,7 +59,7 @@ const Search = (props: SearchProps): JSX.Element => {
 					absolute
 					inset-y-0
 					left-0
-					pl-3
+					pl-4
 					flex
 					items-center
 					pointer-events-none
