@@ -1,5 +1,5 @@
 //Boilerplate
-import { useState } from "react"
+import { useState, useEffect, useRef, ReactEventHandler } from "react"
 
 //Icons
 import { IoSearch } from "react-icons/io5"
@@ -25,6 +25,33 @@ interface SearchProps {
 const Search = (props: SearchProps): JSX.Element => {
 	//States
 	const [toggleDropdown, setToggleDropdown] = useState<boolean>(false)
+
+	//Refs
+	const dropdownRef = useRef<HTMLDivElement>(null)
+
+	//Effects
+	useEffect(() => {
+			const clickOutsideHandler = (event: MouseEvent | Event): void => {
+				if(toggleDropdown &&
+					dropdownRef.current &&
+					!dropdownRef.current.contains(event.target as Node)
+				) {
+					setToggleDropdown(false)
+				}
+			}
+
+			document.addEventListener("mousedown", clickOutsideHandler)
+			document.addEventListener("scroll", clickOutsideHandler)
+			// document.addEventListener("touchstart", clickOutsideHandler)
+
+			return (): void => {
+				document.removeEventListener("mousedown", clickOutsideHandler)
+				document.removeEventListener("scroll", clickOutsideHandler)
+				// document.removeEventListener("touchstart", clickOutsideHandler)
+			}
+		},
+		[toggleDropdown]
+	)
 
 	return (
 		<div className="py-5">
@@ -73,7 +100,7 @@ const Search = (props: SearchProps): JSX.Element => {
 				/>
 
 				<div className="absolute inset-y-0 right-0 flex items-center">
-					<div>
+					<div ref={dropdownRef}>
 						<button type="button" 
 							onClick={() => setToggleDropdown((value: boolean) => !value)}
 							className="

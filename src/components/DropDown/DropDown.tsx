@@ -1,6 +1,7 @@
 //Icons
-import { BiCheck } from "react-icons/bi"
 import { IoMdCheckmark } from "react-icons/io"
+import { IoArrowDown } from "react-icons/io5"
+import { IoArrowUp } from "react-icons/io5"
 
 //Enumerations
 export enum orderByEnum {
@@ -83,7 +84,7 @@ const DropDown = (props: DropDownProps): JSX.Element => !props.toggleDropdown ? 
 					hover:bg-accent-tertiary-2
 				"
 			>
-				Owner Name {props.sortBy === 2 && <BiCheck />}
+				Owner Name {props.sortBy === 2 && <IoMdCheckmark />}
 			</div>
 
 			<div
@@ -101,7 +102,7 @@ const DropDown = (props: DropDownProps): JSX.Element => !props.toggleDropdown ? 
 					hover:bg-accent-tertiary-2
 				"
 			>
-				Date {props.sortBy === 3 && <BiCheck />}
+				Date {props.sortBy === 3 && <IoMdCheckmark />}
 			</div>
 
 			<div
@@ -119,7 +120,7 @@ const DropDown = (props: DropDownProps): JSX.Element => !props.toggleDropdown ? 
 					hover:bg-accent-tertiary-2
 				"
 			>
-				Ascending {props.orderBy === 1 && <BiCheck />}
+				Ascending {props.orderBy === 1 && <IoArrowDown />}
 			</div>
 
 			<div
@@ -137,7 +138,7 @@ const DropDown = (props: DropDownProps): JSX.Element => !props.toggleDropdown ? 
 					hover:bg-accent-tertiary-2
 				"
 			>
-				Descending {props.orderBy === -1 && <BiCheck />}
+				Descending {props.orderBy === -1 && <IoArrowUp />}
 			</div>
 		</div>
 	</div>
