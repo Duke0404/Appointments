@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "./static/css/main.d8bb4ddf.css",
+    "main.js": "./static/js/main.be55def8.js",
+    "static/media/Bulldog.svg": "./static/media/Bulldog.436d1e86499ab01ee94fc0c8eb041750.svg",
+    "index.html": "./index.html",
+    "main.d8bb4ddf.css.map": "./static/css/main.d8bb4ddf.css.map",
+    "main.be55def8.js.map": "./static/js/main.be55def8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d8bb4ddf.css",
+    "static/js/main.be55def8.js"
+  ]
+}
