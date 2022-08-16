@@ -25,7 +25,7 @@ const App = (): JSX.Element => {
 
 	//Callbacks
 	const fetchAppointments = useCallback(async () => {
-		const response: Response = await fetch("./data/data.json")
+		const response: Response = await fetch("./Data/data.json")
 		const payload: AppointmentInterface<string>[] = await response.json()
 
 		const changedPayload: AppointmentInterface[] = payload.map(
